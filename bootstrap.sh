@@ -124,6 +124,7 @@ EOL
 
 
 echo "ENVIRONMENT VARIABLES"
+
 # need this here to create the database
 POSTGRES_CRED='dbname=trumplearn user=app password=$PGPASSWORD host=localhost'
 
