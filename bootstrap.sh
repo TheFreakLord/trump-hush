@@ -121,7 +121,6 @@ echo "SETUP POSTGRES"
 sudo -u postgres psql postgres -c "CREATE ROLE app with LOGIN CREATEDB ENCRYPTED PASSWORD '$PGPASSWORD';"
 sudo -u postgres psql postgres -c "CREATE database trumplearn;"
 
-export
 python ~/src/db/create.py
 
 cat > ~/src/Procfile <<EOL
