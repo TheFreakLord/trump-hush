@@ -120,6 +120,14 @@ source ~/.bashrc
 echo "SETUP POSTGRES"
 sudo -u postgres psql postgres -c "CREATE ROLE app with LOGIN CREATEDB ENCRYPTED PASSWORD '$PGPASSWORD';"
 sudo -u postgres psql postgres -c "CREATE database trumplearn;"
+
+export
 python ~/src/db/create.py
 
+cat > ~/src/Procfile <<EOL
+worker: celery -A tasks worker --loglevel=info
+web: python ./web/server.py
+EOL
+
 echo "PROVISIONING COMPLETED"
+
