@@ -66,7 +66,6 @@ cd build
 ccmake ..
 make
 sudo make install
-echo "export ld_library_path=$ld_library_path:/usr/local/lib/" >> ~/.bashrc; source ~/.bashrc
 
 echo "INSTALLING YOUTUBE-DL"
 sudo wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl 2>&1 >/dev/null
@@ -107,26 +106,37 @@ server {
   }
 }
 EOL
+
 sudo mv ~/nginx.conf /etc/nginx/sites-enabled/trumplearn.com
 sudo rm /etc/nginx/sites-enabled/default
 sudo service nginx restart
 
-echo "ENVIRONMENT VARIABLES"
-echo "export REDIS_SERVER='redis://127.0.0.1:6379'" >> ~/.bashrc
-echo "export POSTGRES_CRED='dbname=trumplearn user=app password=$PGPASSWORD host=localhost'" >> ~/.bashrc
-echo "export DEBUG=false" >> ~/.bashrc
-source ~/.bashrc
+
 
 echo "SETUP POSTGRES"
 sudo -u postgres psql postgres -c "CREATE ROLE app with LOGIN CREATEDB ENCRYPTED PASSWORD '$PGPASSWORD';"
 sudo -u postgres psql postgres -c "CREATE database trumplearn;"
 
-python ~/src/db/create.py
-
 cat > ~/src/Procfile <<EOL
-worker: celery -A tasks worker --loglevel=info
-web: python ./web/server.py
+worker: /home/ubuntu/bin/celery -A tasks worker --loglevel=info
+web: /home/ubuntu/bin/python ./web/server.py
 EOL
 
-echo "PROVISIONING COMPLETED"
 
+echo "ENVIRONMENT VARIABLES"
+# need this here to create the database
+POSTGRES_CRED='dbname=trumplearn user=app password=$PGPASSWORD host=localhost'
+
+cat > ~/src/.env <<EOL
+REDIS_SERVER='redis://127.0.0.1:6379'
+POSTGRES_CRED=$POSTGRES_CRED
+DEBUG=false
+LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/
+EOL
+
+python ~/src/db/create.py
+
+# Export service:
+sudo /home/ubuntu/bin/honcho export -c process=2 -p 3000 -u ubuntu -a trump upstart /etc/init
+
+echo "PROVISIONING COMPLETED !"
