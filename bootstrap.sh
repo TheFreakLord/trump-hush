@@ -127,7 +127,7 @@ POSTGRES_CRED="dbname=trumplearn user=app password=$PGPASSWORD host=localhost"
 
 cat > ~/src/.env <<EOL
 REDIS_SERVER='redis://127.0.0.1:6379'
-POSTGRES_CRED=$POSTGRES_CRED
+POSTGRES_CRED="$POSTGRES_CRED"
 DEBUG=false
 LD_LIBRARY_PATH=/usr/local/lib/
 EOL
