@@ -1,7 +1,8 @@
 if [ -n "$PGPASSWORD" ]; then
   echo "* PROVISIONING BOX..."
 else
-  echo 'Missing params $PGPASSWORD'
+  echo 'Missing param $PGPASSWORD'
+  echo 'export PGPASSWORD="password"'
   exit
 fi
 
@@ -122,20 +123,22 @@ worker: /home/ubuntu/bin/celery -A tasks worker --loglevel=info
 web: /home/ubuntu/bin/python ./web/server.py
 EOL
 
-# need this here to create the database
-POSTGRES_CRED="dbname=trumplearn user=app password=$PGPASSWORD host=localhost"
+export POSTGRES_CRED='dbname=trumplearn user=app password='$PGPASSWORD' host=localhost'
 
-cat > ~/src/.env <<EOL
-REDIS_SERVER='redis://127.0.0.1:6379'
-POSTGRES_CRED="$POSTGRES_CRED"
-DEBUG=false
-LD_LIBRARY_PATH=/usr/local/lib/
+cat >> ~/.profile <<EOL
+export PGPASSWORD="$PGPASSWORD"
+export REDIS_SERVER='redis://127.0.0.1:6379'
+export POSTGRES_CRED="$POSTGRES_CRED"
+export DEBUG=False
+export LD_LIBRARY_PATH=/usr/local/lib/
 EOL
+
+source ~/.profile
 
 python ~/src/db/create.py
 
 # Export service:
-sudo /home/ubuntu/bin/honcho export -c process=2 -p 3000 -u ubuntu -a trump upstart /etc/init
+sudo /home/ubuntu/bin/honcho export -e ~/.profile -c process=2 -p 3000 -u ubuntu -a trump upstart /etc/init
 sudo start trump
 
-echo "PROVISIONING COMPLETED !"
+echo "PROVISIONING COMPLETED!"

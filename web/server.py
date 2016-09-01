@@ -40,7 +40,8 @@ def add_header(response):
   if os.environ['DEBUG'] == 'True':
     response.headers['Cache-Control'] = 'public, max-age=0'
     response.headers['Pragma'] = ' no-cache'
-    return response
+
+  return response
 
 if __name__ == '__main__':
   app.run(host='0.0.0.0', port=3000, debug=(os.environ['DEBUG'] == 'True'))
