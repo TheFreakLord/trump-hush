@@ -40,8 +40,8 @@ window.onYouTubeIframeAPIReady = function() {
 
 function initPlayer(videoId) {
   player = new YT.Player("player", {
-    "height": "360",
-    "width": "640",
+    "height": "394",
+    "width": "700",
     "cc_load_policy": 0,
     "showinfo": 0,
     "rel": 0,
@@ -64,55 +64,57 @@ function onPlayerStateChange(event) {
   if (event.data == YT.PlayerState.PLAYING) {
     var currentTime = player.getCurrentTime()
     currentTimeIndex = Math.ceil((currentTime*1000)/rate)
-    timer = setInterval(talkAlong, rate);
+    timer = setInterval(talk, rate);
   }
 }
 
 //
-// Gauge code
+// Wave code
 //
-var needle = document.getElementById('needle')
-var gauge  = document.body
+var TRUMP_TRIGGER = 0.5;
+var MIN_AMPLITUDE = 0.01;
+var currentAmplitude = MIN_AMPLITUDE;
+var body = document.body
+var sw = new SiriWave({
+  color: '#444',
+	width: 800,
+	height: 205,
+	speed: 0.12,
+	amplitude: MIN_AMPLITUDE,
+	container: $("#wave")[0],
+	autostart: true,
+});
 
-var MIN = 0.1
-var TRUMP_TRIGGER = 0.5
-var MAX_PX = $('#mainarea').height() - $('#needle').height()
-var needleDegree = MIN
-
-function talkAlong() {
-  currentTimeIndex++
-  confidence = trump_json.predictions[currentTimeIndex]
+function talk() {
+  currentTimeIndex++;
+  confidence = trump_json.predictions[currentTimeIndex];
   if(confidence > 0.96) {
-    updateGauge(confidence)
+    updateWave(confidence);
   }
 }
 
-function updateGauge(newDeg) {
-  needlePosition = newDeg * MAX_PX
-  needle.style.transform = "translateY(-" + needlePosition + "px)"
+function updateWave(confidence) {
+  sw.setAmplitude(confidence);
 
-  if (newDeg > TRUMP_TRIGGER) {
-    gauge.className = 'red'
-    needle.className = ''
+  if (confidence > TRUMP_TRIGGER) {
+    body.className = 'red'
   } else {
-    gauge.className = 'green'
+    body.className = ''
   }
 
-  if(newDeg <= MIN) {
-    needle.className = 'rest'
-  }
-
-  needleDegree = newDeg
+  currentAmplitude = confidence
 }
 
 function pullBack() {
-  PULL_RATE = 0.02
+  PULL_RATE = 0.03
   setInterval(function() {
-    if(needleDegree >= MIN) {
-      updateGauge(needleDegree - PULL_RATE)
+    if(currentAmplitude >= PULL_RATE) {
+      console.log('pulling');
+      updateWave(currentAmplitude - PULL_RATE)
     }
   }, 50)
 }
+
 
 //
 // Main app
@@ -216,6 +218,6 @@ $(window).on('hashchange', function() {
 });
 
 $(document).ready(function(){
-  pullBack()
+  pullBack();
   loadingScreen.init()
 })
