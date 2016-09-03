@@ -1,23 +1,12 @@
 @import url(https://fonts.googleapis.com/css?family=Pacifico|Press+Start+2P|family=Open+Sans:400,200);
-@keyframes floating {
-  0%, 100% {
-    margin-bottom: 0; }
-  50% {
-    margin-bottom: 20px; } }
 body {
   height: 100%;
   margin: auto;
   font: 600 16px/16px "Open Sans", sans-serif;
   background: #fefefe;
   transition: background 0.5s ease-in-out; }
-  body.green {
-    background: #fefefe; }
   body.red {
-    background: #fb7715; }
-    body.red #mainarea #needle {
-      box-shadow: 0 0 10px white; }
-    body.red .gauge-text {
-      color: white; }
+    background: gold; }
 
 ul {
   margin: 0;
@@ -44,25 +33,43 @@ p, input, label {
 #mainarea {
   text-align: center; }
 
+#playerWrapper {
+  position: relative;
+  top: 15px; }
+
 #header {
+  display: flex;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.03);
   box-sizing: border-box;
   width: 100%;
-  height: 80px;
-  margin-bottom: 30px;
-  padding-top: 10px; }
+  height: 90px; }
   #header .logo {
-    float: left;
     background: url(/static/images/logo.png);
-    width: 65px;
-    height: 65px;
+    width: 70px;
+    height: 70px;
     background-size: 100%;
     background-repeat: no-repeat;
-    position: relative;
-    top: 11px;
-    left: 11px; }
-  #header .info {
-    float: left;
     margin-left: 22px; }
+  #header .info {
+    margin-left: 10px; }
+  #header .plusWrapper {
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    background: #3e9ff9;
+    color: white;
+    font-size: 26px;
+    text-align: center;
+    width: 43px;
+    height: 43px;
+    padding-top: 13px;
+    box-sizing: border-box;
+    border-radius: 50%;
+    transition: all 0.5s ease;
+    transform: rotate(0); }
+    #header .plusWrapper.active {
+      transform: rotate(224deg); }
   #header h1 {
     font-size: 32px;
     margin-bottom: 0; }
