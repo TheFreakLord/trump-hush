@@ -168,13 +168,13 @@ iframe#player {
       background-size: 100%;
       display: block; }
       .social li a#twitter {
-        background-image: url("../images/icons/twitter.png"); }
+        background-image: url("/static/images/icons/twitter.png"); }
       .social li a#github {
-        background-image: url("../images/icons/github-logo.png"); }
+        background-image: url("/static/images/icons/github-logo.png"); }
       .social li a#facebook {
-        background-image: url("../images/icons/facebook.png"); }
+        background-image: url("/static/images/icons/facebook.png"); }
       .social li a#reddit {
-        background-image: url("../images/icons/reddit.png"); }
+        background-image: url("/static/images/icons/reddit.png"); }
       .social li a:hover {
         transform: scale(1.3); }
 
