@@ -184,8 +184,8 @@ iframe#player {
   bottom: 0;
   left: 0;
   right: 0;
-  text-align: center;
-  font-size: 12px; }
+  font-size: 12px;
+  padding-left: 20px; }
 
 .clearfix {
   clear: both; }
@@ -232,5 +232,16 @@ iframe#player {
     #loadingWrapper .loading img {
       width: 100%;
       height: auto; }
+
+#error {
+  background: #ff0065;
+  text-align: center;
+  padding: 10px;
+  color: white;
+  visibility: hidden;
+  top: 0;
+  position: absolute;
+  left: 0;
+  right: 0; }
 
 /*# sourceMappingURL=style.css.map */

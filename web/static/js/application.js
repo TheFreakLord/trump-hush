@@ -124,10 +124,10 @@ function showError(msg) {
   var display;
   switch(msg) {
     case 'long':
-      display = "Videos can't be huuuuuge. 20 minutes max";
+      display = "Video can't be huuuuuge. 20 minutes max";
       break
     case 'not_found':
-      display = "No such video of me.";
+      display = "Video not found. It's definitely hillary's fault.";
       break
     default:
       display = "Something went tremendously wrong.";
@@ -145,7 +145,9 @@ function loadVideoFromUrl(callback) {
   }
 
   $.getJSON('api/videos/' + videoId, function(json) {
-    if(json.delayed) {
+    if(json.state === 'not_found') {
+      showError('not_found')
+    } else if(json.delayed) {
       runPolling(videoId)
     } else if (json.is_too_long) {
       showError('long')
