@@ -48,15 +48,11 @@ function initPlayer(videoId) {
     "fs": 0,
     "videoId": videoId,
     "events": {
-      // "onReady": onPlayerReady, // Not in use now
+      "onReady": onPlayerReady,
       "onStateChange": onPlayerStateChange
     }
   })
 }
-// Not in use now
-// function onPlayerReady(event) {
-//   // event.target.playVideo();
-// }
 
 function onPlayerStateChange(event) {
   var rate = trump_json.rate
@@ -68,6 +64,10 @@ function onPlayerStateChange(event) {
   }
 }
 
+function onPlayerReady() {
+  $('.loading-video').remove()
+}
+
 //
 // Wave code
 //
@@ -75,10 +75,12 @@ var TRUMP_TRIGGER = 0.5;
 var MIN_AMPLITUDE = 0.01;
 var currentAmplitude = MIN_AMPLITUDE;
 var body = document.body
+var $confidenceIndicator = $('#confidence-indicator').find('span')
+
 var sw = new SiriWave({
   color: '#444',
 	width: 800,
-	height: 205,
+	height: 190,
 	speed: 0.12,
 	amplitude: MIN_AMPLITUDE,
 	container: $("#wave")[0],
@@ -88,6 +90,7 @@ var sw = new SiriWave({
 function talk() {
   currentTimeIndex++;
   confidence = trump_json.predictions[currentTimeIndex];
+  $confidenceIndicator.html(confidence.toFixed(2))
   if(confidence > 0.96) {
     updateWave(confidence);
   }
@@ -95,7 +98,6 @@ function talk() {
 
 function updateWave(confidence) {
   sw.setAmplitude(confidence);
-
   if (confidence > TRUMP_TRIGGER) {
     body.className = 'red'
   } else {
@@ -109,7 +111,6 @@ function pullBack() {
   PULL_RATE = 0.03
   setInterval(function() {
     if(currentAmplitude >= PULL_RATE) {
-      console.log('pulling');
       updateWave(currentAmplitude - PULL_RATE)
     }
   }, 50)

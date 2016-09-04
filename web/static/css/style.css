@@ -1,10 +1,11 @@
 @import url(https://fonts.googleapis.com/css?family=Pacifico|Press+Start+2P|family=Open+Sans:400,200);
 body {
+  color: #444;
   height: 100%;
   margin: auto;
   font: 600 16px/16px "Open Sans", sans-serif;
   background: #fefefe;
-  transition: background 0.5s ease-in-out; }
+  transition: all 0.4s ease; }
   body.red {
     background: gold; }
 
@@ -26,16 +27,55 @@ h4 {
 p, h1, h4, label {
   color: #404040; }
 
-p, input, label {
+p, input, label, input {
   font-family: "Open Sans", sans-serif;
   font-weight: 100; }
 
 #mainarea {
   text-align: center; }
 
+#waveWrapper, #wave, canvas {
+  position: relative;
+  z-index: 3; }
+
+iframe#player {
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3); }
+
 #playerWrapper {
   position: relative;
-  top: 15px; }
+  margin: auto;
+  top: 15px;
+  width: 700px;
+  height: 394px; }
+
+#confidence-indicator {
+  position: relative;
+  bottom: 65px;
+  font-size: 18px; }
+
+#new-video {
+  background: white;
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 90px;
+  transform: translateY(-180px);
+  transition: all 0.4s ease;
+  z-index: 2; }
+  #new-video.active {
+    transform: translateY(-90px); }
+  #new-video input {
+    font-style: italic;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    display: block;
+    padding: 0 25px;
+    font-size: 30px;
+    border: none;
+    color: #676767;
+    border-bottom: solid 2px #c9c9c9;
+    outline: none; }
 
 #header {
   display: flex;
@@ -53,83 +93,67 @@ p, input, label {
     margin-left: 22px; }
   #header .info {
     margin-left: 10px; }
-  #header .plusWrapper {
-    cursor: pointer;
-    position: absolute;
-    right: 20px;
-    background: #3e9ff9;
-    color: white;
+
+.plusWrapper {
+  position: absolute;
+  z-index: 3;
+  cursor: pointer;
+  right: 20px;
+  width: 43px;
+  height: 43px; }
+  .plusWrapper .circle {
     font-size: 26px;
+    height: 100%;
     text-align: center;
-    width: 43px;
-    height: 43px;
     padding-top: 13px;
+    color: white;
     box-sizing: border-box;
-    border-radius: 50%;
-    transition: all 0.5s ease;
-    transform: rotate(0); }
-    #header .plusWrapper.active {
-      transform: rotate(224deg); }
-  #header h1 {
+    border-radius: 50%; }
+    .plusWrapper .circle.ear {
+      background-color: #57deb2;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      z-index: -1;
+      transform: translateX(0);
+      transition: all 0.4s ease; }
+      .plusWrapper .circle.ear:hover {
+        background-color: #2cd69e; }
+      .plusWrapper .circle.ear.active {
+        transform: translateX(-50px); }
+    .plusWrapper .circle.plus {
+      background-color: #3e9ff9;
+      transition: all 0.4s ease;
+      transform: rotate(0); }
+      .plusWrapper .circle.plus:hover {
+        background-color: #0d86f7; }
+      .plusWrapper .circle.plus.active {
+        transform: rotate(224deg); }
+  .plusWrapper h1 {
     font-size: 32px;
     margin-bottom: 0; }
-  #header p {
+  .plusWrapper p {
     font-size: 16px; }
-  #header h4 {
+  .plusWrapper h4 {
     margin-bottom: 0;
     margin-top: 50px;
     padding: 0;
     line-height: 0; }
-  #header input {
-    box-sizing: border-box;
-    width: 100%;
-    margin-bottom: 8px;
-    display: block;
-    border: none;
-    height: 50px; }
-    #header input[type="submit"] {
-      position: relative;
-      vertical-align: top;
-      width: 100%;
-      padding: 0;
-      font-size: 18px;
-      color: white;
-      text-align: center;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
-      background: #34495e;
-      border: 0;
-      border-bottom: 2px solid #263849;
-      cursor: pointer;
-      -webkit-box-shadow: inset 0 -2px #263849;
-      box-shadow: inset 0 -2px #263849; }
-      #header input[type="submit"]:active {
-        top: 1px;
-        outline: none;
-        -webkit-box-shadow: none;
-        box-shadow: none; }
-    #header input[type="text"] {
-      padding: 0 15px;
-      font-size: 14px;
-      color: #343434;
-      border-bottom: solid 2px #c9c9c9;
-      transition: border 0.3s;
-      outline: none; }
-      #header input[type="text"]:focus {
-        border-bottom: solid 2px #969696; }
-  #header ul.samples {
+  .plusWrapper ul.samples {
     margin-top: 35px;
     text-align: center; }
-    #header ul.samples li {
+    .plusWrapper ul.samples li {
       display: inline-block;
       box-sizing: border-box;
       width: 45%; }
-      #header ul.samples li:first-child {
+      .plusWrapper ul.samples li:first-child {
         margin-right: 10px; }
-      #header ul.samples li img {
+      .plusWrapper ul.samples li img {
         height: auto;
         width: 100%; }
 
 .social {
+  z-index: 5;
   position: absolute;
   right: 15px;
   bottom: 15px; }
@@ -138,7 +162,7 @@ p, input, label {
     margin-bottom: 5px;
     z-index: 2; }
     .social li a {
-      transition: all 0.3s ease;
+      transition: all 0.4s ease;
       width: 32px;
       height: 32px;
       background-size: 100%;
@@ -165,5 +189,48 @@ p, input, label {
 
 .clearfix {
   clear: both; }
+
+#loadingWrapper {
+  background-color: rgba(0, 0, 0, 0.6);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 9;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.2s ease-in;
+  visibility: hidden;
+  opacity: 0; }
+  #loadingWrapper.active {
+    opacity: 1;
+    visibility: visible; }
+  #loadingWrapper .loading {
+    width: 500px;
+    height: auto;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: #434380;
+    padding: 5px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    overflow: hidden; }
+    #loadingWrapper .loading a {
+      float: right;
+      position: relative;
+      bottom: 30px;
+      right: 10px;
+      color: white;
+      font-family: "Pacifico";
+      cursor: pointer; }
+    #loadingWrapper .loading p {
+      font-family: "Press Start 2P", cursive;
+      color: white;
+      text-align: center; }
+    #loadingWrapper .loading img {
+      width: 100%;
+      height: auto; }
 
 /*# sourceMappingURL=style.css.map */

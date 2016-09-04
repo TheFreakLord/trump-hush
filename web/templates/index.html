@@ -19,40 +19,39 @@
     <div class="logo"></div>
     <div class="info">
       <h1>Trump Learn</h1>
-      <p>A Machince learning model that only responds to the Donald</p>
+      <p>A Machince learning model that responds solely to the voice of Donald Trump in youtube videos.</p>
     </div>
     <div class="plusWrapper">
-      <div class="plus">+</div>
+      <div class="circle plus">+</div>
+      <div class="circle ear">👂</div>
     </div>
   </div>
   <div class="clearfix"></div>
-  <!-- <div class="card">
-    <div class="card-content">
-      <!-- <form id="new-video">
-        <label>Add a video:</label>
-        <input type="text" placeholder="https://www.youtube.com/watch?v=...." id="new-video-input">
-        <input type="submit" value="Recognize" />
-      </form> -->
-    </div>
-    <div class="footer">
-      Made by <a href="//twitter.com/danielravina" target="_blank">@danielravina</a> | Graphics by <a href='http://www.freepik.com' target="_blank">freepik</a></p>
-    </div>
-  </div>
+  <form id="new-video">
+    <input type="text" placeholder="https://www.youtube.com/watch?v=...." id="new-video-input">
+  </form>
+
   <div id="mainarea">
     <div id="playerWrapper">
+      <h3 class="loading-video">Loading Video...</h3>
       <div id="player"></div>
     </div>
-    <div id="wave"></div>
+    <div class="waveWrapper">
+      <div id="wave"></div>
+      <div id="confidence-indicator">
+        <p>Trump Level: <span>0</span></p>
+      </div>
+    </div>
     <div class="social">
       <ul>
         <li>
-          <a href="https://twitter.com/intent/tweet?hashtags=trumplearn" class="external" id="twitter"></a>
+          <a href="https://twitter.com/intent/tweet?text=This+website+recognizes+Donald+Trump%27s+voice+http://trumplearn.com&hashtags=trumplearn" class="external" id="twitter"></a>
         </li>
         <li>
-          <a href="http://www.reddit.com/submit?url=trumplearn.com&title=Trump-Learn%20-%20Trump%20Voice%20Recognition" class="external" id="reddit"></a>
+          <a href="http://www.reddit.com/submit?url=http://trumplearn.com&title=This+website+recognizes+Donald+Trump%27s+voice" class="external" id="reddit"></a>
         </li>
         <li>
-          <a href="http://www.facebook.com/share.php?u=trumplearn.com&title=Trump-Learn%20-%20Trump%20Voice%20Recognition" class="external" id='facebook'></a>
+          <a href="http://www.facebook.com/share.php?u=http://trumplearn.com&title=This+website+recognizes+Donald+Trump%27s+voice" class="external" id='facebook'></a>
         </li>
         <li>
           <a href="//github.com/danielravina/trump-learn" target="_blank" id="github"></a>
@@ -61,32 +60,35 @@
     </div>
     <div id="error"></div>
   </div>
-  <!-- <div id="loadingWrapper">
+  <div class="footer">
+    Made by <a href="//twitter.com/danielravina" target="_blank">@danielravina</a> | Graphics by <a href='http://www.freepik.com' target="_blank">freepik</a></p>
+  </div>
+  <div id="loadingWrapper">
     <div class="loading">
       <img src="" id="loading-img" alt="">
       <a href="http://giphy.com/search/trump" target="_blank">giphy</a>
-      <p>Recognizing...</p>
+      <p>Listening...</p>
     </div>
-  </div> -->
+  </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
   <script src="static/js/siriwave.js"></script>
   <script src="static/js/application.js"></script>
   <script src="static/js/new-video-form.js"></script>
   <script>
-    // function openwindow(url){
-    //   var w = 640
-    //   var h = 360
-    //   var left = (screen.width/2)-(w/2);
-    //   var top = (screen.height/2)-(h/2);
-    //   NewWindow=window.open(url,'newWin','width='+w+',height='+h+',toolbar=No,top='+top+', left='+left+',location=No,scrollbars=no,status=No,fullscreen=No');
-    //   NewWindow.focus();
-    //   void(0);
-    // }
-    // $('a.external').click(function(e) {
-    //   e.preventDefault()
-    //   openwindow($(e.target).attr('href'))
-    // })
-    //
+    function openwindow(url){
+      var w = 640
+      var h = 360
+      var left = (screen.width/2)-(w/2);
+      var top = (screen.height/2)-(h/2);
+      NewWindow=window.open(url,'newWin','width='+w+',height='+h+',toolbar=No,top='+top+', left='+left+',location=No,scrollbars=no,status=No,fullscreen=No');
+      NewWindow.focus();
+      void(0);
+    }
+    $('a.external').click(function(e) {
+      e.preventDefault()
+      openwindow($(e.target).attr('href'))
+    })
+
     </script>
     <script>
       // (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
