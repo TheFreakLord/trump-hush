@@ -13,6 +13,7 @@ The pipeline is relatively simple and doesn't include sophisticated pre-processi
 - [youtube-dl](https://rg3.github.io/youtube-dl/) to handle youtube downloads
 - [postgresql](https://www.postgresql.org/) - as the database
 - [redis](http://redis.io/) + [celery](http://www.celeryproject.org/) to handle the recognition background job
+- [SiriWave](https://github.com/caffeinalab/siriwavejs) for visualization 
 
 If you want to try it locally you need to have these environment variables:
 ```bash
