@@ -75,6 +75,7 @@ var TRUMP_TRIGGER = 0.5;
 var MIN_AMPLITUDE = 0.01;
 var currentAmplitude = MIN_AMPLITUDE;
 var body = document.body
+var hits = [];
 var $confidenceIndicator = $('#confidence-indicator').find('span')
 
 var sw = new SiriWave({
@@ -87,11 +88,22 @@ var sw = new SiriWave({
 	autostart: true,
 });
 
+// Make sure there are at least 5 consecutive confidence to avoide false positives
+function isHit(confidence) {
+  if (confidence > 0.80) {
+    hits.push(confidence)
+  } else {
+    hits = [];
+    return;
+  }
+  return hits.length === 5
+}
+
 function talk() {
   currentTimeIndex++;
   confidence = trump_json.predictions[currentTimeIndex];
   $confidenceIndicator.html(confidence.toFixed(2))
-  if(confidence > 0.96) {
+  if(isHit(confidence)) {
     updateWave(confidence);
   }
 }
