@@ -51,7 +51,7 @@ iframe#player {
 #confidence-indicator {
   position: relative;
   bottom: 65px;
-  font-size: 36px; }
+  font-size: 20px; }
 
 #new-video {
   background: white;
