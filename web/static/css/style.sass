@@ -25,10 +25,12 @@ ul
   padding: 0
 
 h1,h4
-  font-family: 'Pacifico', cursive
+
+  // font-family: 'Pacifico', cursive
+  font-family: "Press Start 2P", cursive
 
 h1
-  font-weight: 100
+  // font-weight: 100
   letter-spacing: -2px
 h4
   font-weight: 100
@@ -39,23 +41,16 @@ p, h1, h4, label
 
 p, input, label, input
   font-family: 'Open Sans', sans-serif
-  font-weight: 100
+  font-weight: 300
+
 #mainarea
   text-align: center
-
-#waveWrapper, #wave, canvas
-  position: relative
-  z-index: 3
-
-iframe#player
-  box-shadow: 0 1px 8px rgba(0,0,0,0.3)
 
 #playerWrapper
   position: relative
   margin: auto
   top: 15px
-  width: 700px
-  height: 394px
+  width: 640px
 
 #confidence-indicator
   position: relative
@@ -73,7 +68,6 @@ iframe#player
   z-index: 2
   &.active
     transform: translateY(-90px)
-
   input
     font-style: italic
     box-sizing: border-box
@@ -129,6 +123,11 @@ iframe#player
       +all-transition
       &.active
         transform: translateX(-50px)
+      i
+        position: relative
+        bottom: 6px
+        font-size: 20px
+
     &.plus
       +hovers(#3e9ff9)
       +all-transition
@@ -253,3 +252,66 @@ iframe#player
   position: absolute
   left: 0
   right: 0
+
+audio
+  display: none
+
+#audio-widget
+  margin: auto
+  width: 640px
+  margin-top: 26px
+  .row
+    display: flex
+  .column
+    position: relative
+    transition: all .2s ease
+    &.elevator
+      background: #9B59B6
+    &.silent-film
+      background: #1ABC9C
+    &.fart
+      background: #b37b56
+    &.ff
+      background: #FF307F
+    &.sitcom
+      background: #96C93D
+    &.beep
+      background: #7BDFF2
+    &.nature
+      background: #1B6AA5
+    &.mute
+      background: #484452
+    &.active
+      box-shadow: 0 0 9px 3px rgba(black, 0.20)
+      z-index: 1
+      transform: scale(1.05)
+      i
+        font-size: 22px
+        z-index: 0
+
+    &:hover, &.active
+      background: #f4f7ea
+      box-sizing: border-box
+      p
+        color: #333333
+    cursor: pointer
+    align-items: center
+    display: flex
+    justify-content: center
+    flex: 1
+    height: 120px
+    p
+      color: white
+      text-align: center
+      font-size: 14px
+      font-weight: bold
+      line-height: 38px
+      .beta
+        font-size: 10px
+        color: #b83244
+      i
+        +all-transition
+        font-style: normal
+        font-size: 22px
+        display: block
+        margin: auto

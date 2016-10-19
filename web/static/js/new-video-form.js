@@ -12,6 +12,7 @@ var searchToggle = function() {
   $newVideoForm.toggleClass('active')
   $plusButton.toggleClass('active')
   $earButton.toggleClass('active')
+  $('#new-video-input').focus()
 }
 
 var validateYoutubeUrl = function(youtubeUrl) {
@@ -24,7 +25,7 @@ var validateYoutubeUrl = function(youtubeUrl) {
 $newVideoForm.submit(function(e){
   e.preventDefault()
   var inputValue, id, goTo
-  inputValue = document.getElementById('new-video-input').value
+  inputValue = $('#new-video-input').val()
 
   if (validateYoutubeUrl(inputValue)) {
     id = inputValue.split("v=")[1]

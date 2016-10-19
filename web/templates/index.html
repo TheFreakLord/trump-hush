@@ -11,20 +11,21 @@
   <meta property="og:description"   content="Recognize the voice of Donald Trump in Youtube videos"/>
   <meta property="og:image"         content="http://trumplearn.com/static/images/logo128x128.png"/>
   <meta property="og:image:type"    content="image/png" />
-  <title>Trump Learn - Donald Trump Voice Recognition</title>
-  <link rel="stylesheet" href="static/css/style.min.css">
+  <title>Trumpshhh - Auto Mute Donald Trump on any youtube video</title>
+  <link rel="stylesheet" href="static/css/style.css">
+  <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
 </head>
 
 <body>
   <div id="header">
     <div class="logo"></div>
     <div class="info">
-      <h1>Trump Learn</h1>
-      <p>A machince learning model that responds solely to the voice of Donald Trump.</p>
+      <h1>Trumpshhh...</h1>
+      <p>Auto mute donald trump whenever he speak on any youtube video</p>
     </div>
     <div class="plusWrapper">
       <div class="circle plus">+</div>
-      <div class="circle ear">👂</div>
+      <div class="circle ear"><i class="em em-ear"></i></div>
     </div>
   </div>
   <div class="clearfix"></div>
@@ -37,12 +38,11 @@
       <h3 class="loading-video">Loading Video...</h3>
       <div id="player"></div>
     </div>
-    <div class="waveWrapper">
-      <div id="wave"></div>
+
       <div id="confidence-indicator">
-        <p>Trump Level: <span>0</span></p>
+        <p style="display:none;">Confidence Level: <span>0</span></p>
       </div>
-    </div>
+
     <div class="social">
       <ul>
         <li>
@@ -61,9 +61,6 @@
     </div>
     <div id="error"></div>
   </div>
-  <div class="footer">
-    Made by <a href="//twitter.com/danielravina" target="_blank">@danielravina</a> | Graphics by <a href='http://www.freepik.com' target="_blank">freepik</a></p>
-  </div>
   <div id="loadingWrapper">
     <div class="loading">
       <img src="" id="loading-img" alt="">
@@ -71,34 +68,42 @@
       <p>Listening...</p>
     </div>
   </div>
+  <div id="audio-widget">
+    <div class="row">
+      <div data-effect="fart" class="column fart"><p><i class="em em-dash"></i>Farts</p></div>
+      <div data-effect="beep" class="column beep"><p><i class="em em-no_good"></i>Beep</p></div>
+      <div data-effect="silent-film" class="column silent-film"><p><i class="em em-movie_camera"></i>Silent Film</p></div>
+      <div data-effect="ff" class="column ff"><p><i class="em em-fast_forward"></i></i>Fast Forward</p></div>
+    </div>
+    <div class="row">
+      <div data-effect="elevator" class="column elevator"><p><i class="em em-speaker"></i>Elevator</p></div>
+
+      <div data-effect="mute" class="column mute"><p><i class="em em-speak_no_evil"></i>Mute</p></div>
+      <div data-effect="nature" class="column nature"><p><i class="em em-bug"></i></i>Nature</p></div>
+      <div data-effect="sitcom" class="column sitcom"><p><i class="em em-clap"></i>Sitcom <span class="beta">(BETA)</span></p></div>
+    </div>
+  </div>
+
+  <audio controls loop id="beep"><source src="/static/sounds/beep.wav" type="audio/wav"></audio>
+  <audio controls loop id="fart"><source src="/static/sounds/fart.wav" type="audio/wav"></audio>
+  <audio controls loop id="silent-film"><source src="/static/sounds/silent-film.wav" type="audio/wav"></audio>
+  <audio controls loop id="elevator"><source src="/static/sounds/elevator.wav" type="audio/wav"></audio>
+  <audio controls loop id="sitcom"><source src="/static/sounds/sitcom.wav" type="audio/wav"></audio>
+  <audio controls loop id="nature"><source src="/static/sounds/nature.wav" type="audio/wav"></audio>
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
-  <script src="static/js/siriwave.js"></script>
   <script src="static/js/application.js"></script>
   <script src="static/js/new-video-form.js"></script>
+  <script stc="static/js/social.js"></script>
   <script>
-    function openwindow(url){
-      var w = 640
-      var h = 360
-      var left = (screen.width/2)-(w/2);
-      var top = (screen.height/2)-(h/2);
-      NewWindow=window.open(url,'newWin','width='+w+',height='+h+',toolbar=No,top='+top+', left='+left+',location=No,scrollbars=no,status=No,fullscreen=No');
-      NewWindow.focus();
-      void(0);
-    }
-    $('a.external').click(function(e) {
-      e.preventDefault()
-      openwindow($(e.target).attr('href'))
-    })
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-    </script>
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-79274317-1', 'auto');
+    ga('send', 'pageview');
+  </script>
 
-      ga('create', 'UA-79274317-1', 'auto');
-      ga('send', 'pageview');
-    </script>
 </body>
 </html>

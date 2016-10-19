@@ -2,7 +2,16 @@
 // Globals
 //
 var player, timer, counter, currentTimeIndex, confidence, trump_json;
-
+var effects = {
+  beep: $('#beep')[0],
+  fart: $('#fart')[0],
+  'silent-film': $('#silent-film')[0],
+  elevator: $('#elevator')[0],
+  sitcom: $('#sitcom')[0],
+  nature: $('#nature')[0],
+}
+var effectKey = 'fart'
+var currentEffect = effects[effectKey];
 var loadingScreen = {
   giphys: [
     "https://media.giphy.com/media/jSB2l4zJ82Rvq/giphy.gif",
@@ -40,8 +49,8 @@ window.onYouTubeIframeAPIReady = function() {
 
 function initPlayer(videoId) {
   player = new YT.Player("player", {
-    "height": "394",
-    "width": "700",
+    "height": "360",
+    "width": "640",
     "cc_load_policy": 0,
     "showinfo": 0,
     "rel": 0,
@@ -57,10 +66,11 @@ function initPlayer(videoId) {
 function onPlayerStateChange(event) {
   var rate = trump_json.rate
   clearInterval(timer);
+  if(currentEffect) { currentEffect.pause() }
   if (event.data == YT.PlayerState.PLAYING) {
     var currentTime = player.getCurrentTime()
     currentTimeIndex = Math.ceil((currentTime*1000)/rate)
-    timer = setInterval(talk, rate);
+    timer = setInterval(talking, rate);
   }
 }
 
@@ -68,67 +78,60 @@ function onPlayerReady() {
   $('.loading-video').remove()
 }
 
-//
-// Wave code
-//
-var TRUMP_TRIGGER = 0.5;
-var MIN_AMPLITUDE = 0.01;
-var currentAmplitude = MIN_AMPLITUDE;
 var body = document.body
 var hits = [];
 var $confidenceIndicator = $('#confidence-indicator').find('span')
 
-var sw = new SiriWave({
-  color: '#444',
-	width: 800,
-	height: 190,
-	speed: 0.12,
-	amplitude: MIN_AMPLITUDE,
-	container: $("#wave")[0],
-	autostart: true,
-});
-
-// Make sure there are at least 5 consecutive confidence to avoide false positives
+// Make sure there are at least 6 consecutive confidence to avoide false positives
 function isHit(confidence) {
-  if (confidence > 0.80) {
+  if (confidence > 0.85) {
     hits.push(confidence)
   } else {
-    hits = [];
+    hits.splice(-1,1);
     return;
   }
-  return hits.length === 5
+  if (hits.length < 5) {
+    removeEffect()
+    return
+  } else {
+    return true
+  }
 }
 
-function talk() {
+function talking() {
   currentTimeIndex++;
   confidence = trump_json.predictions[currentTimeIndex];
   $confidenceIndicator.html(confidence.toFixed(2))
   if(isHit(confidence)) {
-    updateWave(confidence);
+    addEffect()
   }
 }
-
-function updateWave(confidence) {
-  sw.setAmplitude(confidence);
-  if (confidence > TRUMP_TRIGGER) {
-    body.className = 'red'
-  } else {
-    body.className = ''
+function removeEffect() {
+  player.setPlaybackRate(1.0)
+  if(currentEffect) { currentEffect.pause() }
+  if(effectKey == 'sitcom') {
+    currentEffect.play()
+    return
   }
-
-  currentAmplitude = confidence
+  player.unMute()
 }
 
-function pullBack() {
-  PULL_RATE = 0.03
-  setInterval(function() {
-    if(currentAmplitude >= PULL_RATE) {
-      updateWave(currentAmplitude - PULL_RATE)
-    }
-  }, 50)
+function addEffect() {
+  switch(effectKey) {
+    case 'sitcom':
+      player.unMute()
+      break;
+    case 'ff':
+      player.setPlaybackRate(1.5)
+      break;
+    case 'mute':
+      player.mute()
+      break;
+    default:
+      player.mute()
+      currentEffect.play()
+  }
 }
-
-
 //
 // Main app
 //
@@ -176,7 +179,6 @@ function updateTrumpJson(json) {
   trump_json.predictions = JSON.parse(json.predictions)
 }
 
-
 function runPolling(videoId) {
   var poll;
   var stopPoll = function() {
@@ -187,7 +189,7 @@ function runPolling(videoId) {
 
   loadingScreen.show()
 
-  poll = setInterval(function() {
+  var poll = setInterval(function() {
     $.getJSON('api/videos/' + videoId + "/poll", function(video) {
       switch(video.state) {
         case "not_ready":
@@ -223,6 +225,20 @@ function clearInput() {
   $('#new-video-input').val("")
 }
 
+// Emojis
+
+$('.column.' + effectKey).addClass('active');
+
+Object.keys(effects).forEach(function(audio) { effects[audio].volume = 0.4 })
+
+$('.column').click(function(e) {
+  $column = $('.column').removeClass('active')
+  $(this).addClass('active')
+  if(currentEffect) { currentEffect.pause() }
+  effectKey = $(this).data("effect")
+  currentEffect = effects[effectKey]
+})
+
 //
 // Entry point
 //
@@ -233,6 +249,5 @@ $(window).on('hashchange', function() {
 });
 
 $(document).ready(function(){
-  pullBack();
   loadingScreen.init()
 })
