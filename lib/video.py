@@ -90,7 +90,7 @@ class Video:
 
   def get_playlist(self):
     Video.conn.execute(
-      "SELECT youtube_id, thumbnail FROM videos OFFSET floor(random()*10) LIMIT 4;"
+      "SELECT youtube_id, thumbnail FROM videos WHERE thumbnail NOT IN ('') OFFSET floor(random()*10) LIMIT 4;"
     )
 
     results = Video.conn.fetchall()
