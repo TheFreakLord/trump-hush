@@ -88,6 +88,19 @@ class Video:
 
     Video.db.commit()
 
+  def get_playlist(self):
+    Video.conn.execute(
+      "SELECT youtube_id, thumbnail FROM videos OFFSET floor(random()*10) LIMIT 4;"
+    )
+
+    results = Video.conn.fetchall()
+
+    if results == None:
+      return False
+
+    return results
+
+
   def last(self, num = 1):
     Video.conn.execute(
       '''

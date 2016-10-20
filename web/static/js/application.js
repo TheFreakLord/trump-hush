@@ -72,6 +72,8 @@ function onPlayerStateChange(event) {
     var currentTime = player.getCurrentTime()
     currentTimeIndex = Math.ceil((currentTime*1000)/rate)
     timer = setInterval(talking, rate);
+  } else if(event.data == YT.PlayerState.ENDED) {
+    $('#new-video, .circle').addClass('active')
   }
 }
 
@@ -81,7 +83,6 @@ function onPlayerReady() {
 
 var body = document.body
 var hits = [];
-var $confidenceIndicator = $('#confidence-indicator').find('span')
 
 // Make sure there are at least 6 consecutive confidence to avoide false positives
 function isHit(confidence) {
@@ -102,7 +103,7 @@ function isHit(confidence) {
 function talking() {
   currentTimeIndex++;
   confidence = trump_json.predictions[currentTimeIndex];
-  $confidenceIndicator.html(confidence.toFixed(2))
+
   if(isHit(confidence)) {
     addEffect()
   }

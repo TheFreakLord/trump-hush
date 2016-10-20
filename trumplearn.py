@@ -29,6 +29,11 @@ def popular():
   video.disconnect()
   return popular
 
+def playlist():
+  Video.connect()
+  video = Video()
+  return video.get_playlist()
+
 def get_video(youtube_src):
   logger.log('Checking %s' % youtube_src)
   youtube_id = __parse_youtube_src(youtube_src)

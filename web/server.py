@@ -35,6 +35,11 @@ def popular_video():
   response = trumplearn.popular()
   return jsonify(response)
 
+@app.route('/api/videos/playlist')
+def playlist():
+  response = trumplearn.playlist()
+  return jsonify(response)
+
 @app.after_request
 def add_header(response):
   if os.environ['DEBUG'] == 'True':
