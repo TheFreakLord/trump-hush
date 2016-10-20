@@ -38,14 +38,24 @@ $newVideoForm.submit(function(e){
 // Playlist
 //
 function renderPlaylist() {
-  $playlist = $('.playlist')
+  $playlist_content = $('.playlist').find('.contents')
   $.getJSON('/api/videos/playlist', function(playlist) {
+    content = ""
     Object.keys(playlist).forEach(function(key) {
       var imgUrl = playlist[key]
-      $playlist.append("<div class='video'><a href='#" + key +"'><img src='" + imgUrl + "'/></a></div>")
+      content += "<div class='video'><a href='#" + key +"'><img src='" + imgUrl + "'/></a></div>"
     })
-    $('.video').click(searchToggle)
+    $playlist_content.html(content)
+
+    $('.video').click(function() {
+      searchToggle()
+      renderPlaylist()
+    })
   })
 }
 
 renderPlaylist()
+
+$('.loadMore').click(function() {
+  renderPlaylist()
+})

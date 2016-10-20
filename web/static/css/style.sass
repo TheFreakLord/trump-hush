@@ -319,13 +319,14 @@ audio
         margin: auto
 
 .playlist
-  display: flex
   float: right
-  justify-content: space-around
   position: relative
   bottom: 75px
   right: 125px
   width: 370px
+  .contents
+    display: flex
+    justify-content: space-around
   .video
     a
       font-size: 12px
@@ -337,3 +338,9 @@ audio
   position: relative
   left: 5px
   font-weight: bold
+
+.loadMore
+  position: relative
+  bottom: 44px
+  right: 22px
+  cursor: pointer

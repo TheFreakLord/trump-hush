@@ -305,13 +305,14 @@ audio {
         margin: auto; }
 
 .playlist {
-  display: flex;
   float: right;
-  justify-content: space-around;
   position: relative;
   bottom: 75px;
   right: 125px;
   width: 370px; }
+  .playlist .contents {
+    display: flex;
+    justify-content: space-around; }
   .playlist .video a {
     font-size: 12px; }
   .playlist .video img {
@@ -322,5 +323,11 @@ audio {
   position: relative;
   left: 5px;
   font-weight: bold; }
+
+.loadMore {
+  position: relative;
+  bottom: 44px;
+  right: 22px;
+  cursor: pointer; }
 
 /*# sourceMappingURL=style.css.map */
