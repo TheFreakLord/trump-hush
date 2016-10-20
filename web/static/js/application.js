@@ -9,6 +9,7 @@ var effects = {
   elevator: $('#elevator')[0],
   sitcom: $('#sitcom')[0],
   nature: $('#nature')[0],
+  china: $('#china')[0],
 }
 var effectKey = 'fart'
 var currentEffect = effects[effectKey];
@@ -120,9 +121,6 @@ function addEffect() {
   switch(effectKey) {
     case 'sitcom':
       player.unMute()
-      break;
-    case 'ff':
-      player.setPlaybackRate(1.5)
       break;
     case 'mute':
       player.mute()
