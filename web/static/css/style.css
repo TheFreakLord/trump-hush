@@ -99,9 +99,8 @@ p, input, label, input {
       margin-left: 6px;
       padding: 10px 26px;
       letter-spacing: 3px;
-      color: white; }
+      color: rgba(255, 255, 255, 0.5); }
       #header .title span.talking {
-        color: #f52525;
         color: rgba(255, 249, 57, 0.8); }
 
 .plusWrapper {
@@ -346,14 +345,6 @@ audio {
   bottom: 44px;
   right: 22px;
   cursor: pointer; }
-
-.seeThru-display {
-  z-index: 1;
-  position: absolute;
-  left: -9999px;
-  background: rgba(139, 139, 139, 0.2); }
-  .seeThru-display.active {
-    left: 0; }
 
 .typed-cursor {
   opacity: 1;

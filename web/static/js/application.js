@@ -1,7 +1,7 @@
 //
 // Globals
 //
-var player, timer, counter, currentTimeIndex, confidence, trump_json, oldFilm, $seeThru;
+var player, timer, counter, currentTimeIndex, confidence, trump_json;
 
 var effects = {
   beep: $('#beep')[0],
@@ -118,10 +118,6 @@ function removeEffect() {
     currentEffect.play()
     return
   }
-
-  if(effectKey == 'silent-film') {
-    hideOldFilm()
-  }
   player.unMute()
 }
 
@@ -133,8 +129,6 @@ function addEffect() {
     case 'mute':
       player.mute()
       break;
-    case 'silent-film':
-      showOldFilm()
     default:
       player.mute()
       currentEffect.play()
@@ -243,30 +237,10 @@ $('.column').click(function(e) {
   $column = $('.column').removeClass('active')
   $(this).addClass('active')
   if(currentEffect) { currentEffect.pause() }
-  hideOldFilm()
   effectKey = $(this).data("effect")
   currentEffect = effects[effectKey]
 })
 
-//
-// Old Film logic
-//
-
-function oldFilmController() {
-  oldFilm = $('#old-film')[0]
-  oldFilm.pause()
-  $seeThru = $('.seeThru-display')
-}
-
-function showOldFilm() {
-  $seeThru.addClass('active')
-  oldFilm.play()
-}
-
-function hideOldFilm() {
-  $seeThru.removeClass('active')
-  oldFilm.pause()
-}
 //
 // Entry point
 //
@@ -279,10 +253,4 @@ $(window).on('hashchange', function() {
 
 $(document).ready(function(){
   loadingScreen.init()
-  seeThru.create('#old-film', {
-    width: 640,
-    height: 360
-  }).ready(function() {
-    oldFilmController()
-  });
 })
