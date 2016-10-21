@@ -12,7 +12,7 @@
   <meta property="og:image"         content="http://trumplearn.com/static/images/logo128x128.png"/>
   <meta property="og:image:type"    content="image/png" />
   <title>Trumpshhh - Auto replace Donald Trump's voice with nonsense</title>
-  <link rel="stylesheet" href="static/css/style.min.css">
+  <link rel="stylesheet" href="static/css/style.css">
   <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
 </head>
 
@@ -22,7 +22,7 @@
       <div class="logo"></div>
     </a>
     <div class="info">
-      <h1>Trumpshhh...</h1>
+      <h1 class="title">Trump <span>ON AIR</span></h1>
       <p>Auto replace Donald Trump's voice with<span class="typewriter"></span></p>
     </div>
     <div class="plusWrapper">
@@ -42,6 +42,9 @@
   <div id="mainarea">
     <div id="playerWrapper">
       <h3 class="loading-video">Loading Video...</h3>
+      <video id="old-film">
+  			<source src="/static/videos/old-film.webm" type="video/webm;" style="opacity: 1; filter: blur(0px);">
+  		</video>
       <div id="player"></div>
     </div>
 
@@ -98,8 +101,10 @@
   <audio controls loop id="china"><source src="/static/sounds/china.mp3" type="audio/mpeg"></audio>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
-  <script src="static/js/application.js"></script>
+  <script src="static/js/vendor/seeThru.min.js"></script>
   <script src="static/js/vendor/typed.min.js"></script>
+
+  <script src="static/js/application.js"></script>
   <script src="static/js/new-video-form.js"></script>
   <script src="static/js/typewriter.js"></script>
   <script stc="static/js/social.js"></script>

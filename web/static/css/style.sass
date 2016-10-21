@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Pacifico|Press+Start+2P|family=Open+Sans:400,200)
+@import url(https://fonts.googleapis.com/css?family=Rubik+One|family=Open+Sans:400,200)
 
 $bg: #fefefe
 $gold: gold
@@ -25,12 +25,9 @@ ul
   padding: 0
 
 h1,h4
-
-  // font-family: 'Pacifico', cursive
-  font-family: "Press Start 2P", cursive
+  font-family: 'Rubik One', sans-serif
 
 h1
-  // font-weight: 100
   letter-spacing: -2px
 h4
   font-weight: 100
@@ -44,6 +41,7 @@ p, input, label, input
   font-weight: 300
 
 #mainarea
+  position: relative
   text-align: center
 
 #playerWrapper
@@ -99,6 +97,23 @@ p, input, label, input
     margin-left: 10px
     p
       font-size: 23px
+      margin-top: 34px
+  .title
+    margin: 0
+    position: relative
+    top: 19px
+    span
+      display: inline-block
+      border: 1px solid #404040
+      background: #404040
+      margin-left: 6px
+      padding: 10px 26px
+      letter-spacing: 3px
+      color: white
+      &.talking
+        color: #f52525
+        color: rgba(255, 249, 57, 0.8)
+
 
 .plusWrapper
   position: absolute
@@ -344,3 +359,11 @@ audio
   bottom: 44px
   right: 22px
   cursor: pointer
+
+.seeThru-display
+  z-index: 1
+  position: absolute
+  left: -9999px
+  background: rgba(#8b8b8b, 0.2)
+  &.active
+    left: 0

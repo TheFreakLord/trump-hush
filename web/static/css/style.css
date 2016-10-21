@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Pacifico|Press+Start+2P|family=Open+Sans:400,200);
+@import url(https://fonts.googleapis.com/css?family=Rubik+One|family=Open+Sans:400,200);
 body {
   color: #444;
   height: 100%;
@@ -14,7 +14,7 @@ ul {
   padding: 0; }
 
 h1, h4 {
-  font-family: "Press Start 2P", cursive; }
+  font-family: "Rubik One", sans-serif; }
 
 h1 {
   letter-spacing: -2px; }
@@ -31,6 +31,7 @@ p, input, label, input {
   font-weight: 300; }
 
 #mainarea {
+  position: relative;
   text-align: center; }
 
 #playerWrapper {
@@ -85,7 +86,23 @@ p, input, label, input {
   #header .info {
     margin-left: 10px; }
     #header .info p {
-      font-size: 23px; }
+      font-size: 23px;
+      margin-top: 34px; }
+  #header .title {
+    margin: 0;
+    position: relative;
+    top: 19px; }
+    #header .title span {
+      display: inline-block;
+      border: 1px solid #404040;
+      background: #404040;
+      margin-left: 6px;
+      padding: 10px 26px;
+      letter-spacing: 3px;
+      color: white; }
+      #header .title span.talking {
+        color: #f52525;
+        color: rgba(255, 249, 57, 0.8); }
 
 .plusWrapper {
   position: absolute;
@@ -329,5 +346,13 @@ audio {
   bottom: 44px;
   right: 22px;
   cursor: pointer; }
+
+.seeThru-display {
+  z-index: 1;
+  position: absolute;
+  left: -9999px;
+  background: rgba(139, 139, 139, 0.2); }
+  .seeThru-display.active {
+    left: 0; }
 
 /*# sourceMappingURL=style.css.map */

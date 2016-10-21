@@ -1,7 +1,8 @@
 //
 // Globals
 //
-var player, timer, counter, currentTimeIndex, confidence, trump_json;
+var player, timer, counter, currentTimeIndex, confidence, trump_json, oldFilm, $seeThru;
+
 var effects = {
   beep: $('#beep')[0],
   fart: $('#fart')[0],
@@ -56,6 +57,7 @@ function initPlayer(videoId) {
     "showinfo": 0,
     "rel": 0,
     "fs": 0,
+    "volume": 100,
     "videoId": videoId,
     "events": {
       "onReady": onPlayerReady,
@@ -93,13 +95,15 @@ function isHit(confidence) {
     return;
   }
   if (hits.length < 5) {
+    $onAir.removeClass('talking')
     removeEffect()
     return
   } else {
+    $onAir.addClass('talking')
     return true
   }
 }
-
+$onAir = $('h1.title').find('span')
 function talking() {
   currentTimeIndex++;
   confidence = trump_json.predictions[currentTimeIndex];
@@ -115,6 +119,10 @@ function removeEffect() {
     currentEffect.play()
     return
   }
+
+  if(effectKey == 'silent-film') {
+    hideOldFilm()
+  }
   player.unMute()
 }
 
@@ -126,6 +134,8 @@ function addEffect() {
     case 'mute':
       player.mute()
       break;
+    case 'silent-film':
+      showOldFilm()
     default:
       player.mute()
       currentEffect.play()
@@ -234,13 +244,36 @@ $('.column').click(function(e) {
   $column = $('.column').removeClass('active')
   $(this).addClass('active')
   if(currentEffect) { currentEffect.pause() }
+  hideOldFilm()
   effectKey = $(this).data("effect")
   currentEffect = effects[effectKey]
 })
 
 //
+// Old Film logic
+//
+
+function oldFilmController() {
+  oldFilm = $('#old-film')[0]
+  oldFilm.pause()
+  $seeThru = $('.seeThru-display')
+}
+
+function showOldFilm() {
+  $seeThru.addClass('active')
+  oldFilm.play()
+  player.setPlaybackRate(2)
+}
+
+function hideOldFilm() {
+  $seeThru.removeClass('active')
+  oldFilm.pause()
+  player.setPlaybackRate(1)
+}
+//
 // Entry point
 //
+
 $(window).on('hashchange', function() {
   loadVideoFromUrl(function(youtubeId){
     player.loadVideoById(youtubeId)
@@ -249,4 +282,10 @@ $(window).on('hashchange', function() {
 
 $(document).ready(function(){
   loadingScreen.init()
+  seeThru.create('#old-film', {
+    width: 640,
+    height: 360
+  }).ready(function() {
+    oldFilmController()
+  });
 })
