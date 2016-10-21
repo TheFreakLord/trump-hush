@@ -113,7 +113,6 @@ function talking() {
   }
 }
 function removeEffect() {
-  player.setPlaybackRate(1.0)
   if(currentEffect) { currentEffect.pause() }
   if(effectKey == 'sitcom') {
     currentEffect.play()
@@ -262,13 +261,11 @@ function oldFilmController() {
 function showOldFilm() {
   $seeThru.addClass('active')
   oldFilm.play()
-  player.setPlaybackRate(2)
 }
 
 function hideOldFilm() {
   $seeThru.removeClass('active')
   oldFilm.pause()
-  player.setPlaybackRate(1)
 }
 //
 // Entry point

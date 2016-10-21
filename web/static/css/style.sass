@@ -101,7 +101,7 @@ p, input, label, input
   .title
     margin: 0
     position: relative
-    top: 19px
+    top: 25px
     span
       display: inline-block
       border: 1px solid #404040
@@ -367,3 +367,33 @@ audio
   background: rgba(#8b8b8b, 0.2)
   &.active
     left: 0
+
+.typed-cursor
+  opacity: 1
+  -webkit-animation: blink 0.7s infinite
+  -moz-animation: blink 0.7s infinite
+  animation: blink 0.7s infinite
+
+@keyframes blink
+  0%
+    opacity: 1
+  50%
+    opacity: 0
+  100%
+    opacity: 1
+
+@-webkit-keyframes blink
+  0%
+    opacity: 1
+  50%
+    opacity: 0
+  100%
+    opacity: 1
+
+@-moz-keyframes blink
+  0%
+    opacity: 1
+  50%
+    opacity: 0
+  100%
+    opacity: 1

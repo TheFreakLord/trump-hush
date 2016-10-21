@@ -91,7 +91,7 @@ p, input, label, input {
   #header .title {
     margin: 0;
     position: relative;
-    top: 19px; }
+    top: 25px; }
     #header .title span {
       display: inline-block;
       border: 1px solid #404040;
@@ -354,5 +354,33 @@ audio {
   background: rgba(139, 139, 139, 0.2); }
   .seeThru-display.active {
     left: 0; }
+
+.typed-cursor {
+  opacity: 1;
+  -webkit-animation: blink 0.7s infinite;
+  -moz-animation: blink 0.7s infinite;
+  animation: blink 0.7s infinite; }
+
+@keyframes blink {
+  0% {
+    opacity: 1; }
+  50% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+@-webkit-keyframes blink {
+  0% {
+    opacity: 1; }
+  50% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+@-moz-keyframes blink {
+  0% {
+    opacity: 1; }
+  50% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
 
 /*# sourceMappingURL=style.css.map */
