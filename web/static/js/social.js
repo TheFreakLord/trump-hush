@@ -8,6 +8,7 @@ function openwindow(url) {
   void(0);
 }
 
+
 $('a.external').click(function(e) {
   e.preventDefault()
   openwindow($(e.target).attr('href'))
