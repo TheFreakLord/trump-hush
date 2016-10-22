@@ -290,13 +290,15 @@ audio {
       background: #7BDFF2; }
     #audio-widget .column.nature {
       background: #1B6AA5; }
-    #audio-widget .column.mute {
+    #audio-widget .column.boo {
       background: #484452; }
     #audio-widget .column.active {
       background: #f4f7ea;
       box-shadow: 0 0 9px 3px rgba(0, 0, 0, 0.2);
       z-index: 1;
       transform: scale(1.05); }
+      #audio-widget .column.active p {
+        color: #333333; }
       #audio-widget .column.active i {
         font-size: 22px;
         z-index: 0; }
@@ -304,8 +306,6 @@ audio {
       opacity: 0.8; }
     #audio-widget .column:hover, #audio-widget .column.active {
       box-sizing: border-box; }
-      #audio-widget .column:hover p, #audio-widget .column.active p {
-        color: #333333; }
     #audio-widget .column p {
       color: white;
       text-align: center;
