@@ -348,8 +348,6 @@ audio {
     .playlist .contents {
       flex-direction: column; } }
 .typewriter {
-  position: relative;
-  left: 5px;
   font-weight: bold; }
 
 .loadMore {
