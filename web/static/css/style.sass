@@ -334,12 +334,12 @@ audio
         margin: auto
 
 .playlist
-  float: right
-  position: relative
-  bottom: 75px
-  right: 125px
+  position: absolute
+  top: 16px
+  right: 72px
   width: 370px
   .contents
+    align-items: center
     display: flex
     justify-content: space-around
   .video
@@ -348,6 +348,15 @@ audio
     img
       width: 80px
       height: 60px
+  @media(max-width: 1040px)
+    top: 106px
+    right: 104px
+    width: 80px
+    i
+      position: relative
+      left: 85px
+    .contents
+      flex-direction: column
 
 .typewriter
   position: relative

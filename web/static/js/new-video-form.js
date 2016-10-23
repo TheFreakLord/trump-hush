@@ -48,7 +48,6 @@ function renderPlaylist() {
     $playlist_content.html(content)
 
     $('.video').click(function() {
-      searchToggle()
       renderPlaylist()
     })
   })
