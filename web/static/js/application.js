@@ -248,6 +248,8 @@ $('.column').click(function(e) {
 $(window).on('hashchange', function() {
   loadVideoFromUrl(function(youtubeId){
     player.loadVideoById(youtubeId)
+    player.setVolume(100)
+    player.unMute()
   })
 });
 

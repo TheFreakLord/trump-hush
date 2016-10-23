@@ -4,8 +4,7 @@
   "description": "REDIS_SERVER='redis://127.0.0.1:6379' POSTGRES_CRED=\"dbname=trumplearn user=app password=password host=localhost\" DEBUG=True # for development",
   "main": "index.js",
   "scripts": {
-    "sass": "sass web/static/css/style.sass:web/static/css/style.css --watch",
-    "sass-mini": "sass web/static/css/style.sass:web/static/css/style.min.css --style compressed"
+    "sass": "sass web/static/css/style.sass:web/static/css/style.css --watch"
   },
   "repository": {
     "type": "git",
