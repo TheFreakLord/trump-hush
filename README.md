@@ -1,4 +1,4 @@
-# Trump Learn
+# Trump HUSH
 ![Image Trump speaks](https://github.com/danielravina/trump-learn/raw/master/web/static/images/logo.png)
 
 This is an experimental python machine learning pipeline that extracts MFCC voice features from youtube videos and trains a [Gradient Boosting Classifier](http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingClassifier.html) algorithm. For this project, the training data is ~1800 seconds of donald trump speaks in different scenarios + equivalent time of random people (men and women) talk about random stuff. The project was inspired by this [youtube video](https://www.youtube.com/watch?v=_aFo_BV-UzI) where this guy explain some unique features in his talk. I wanted to know if computers are able to analyze these things as well and maybe even more.
@@ -13,7 +13,7 @@ The pipeline is relatively simple and doesn't include sophisticated pre-processi
 - [youtube-dl](https://rg3.github.io/youtube-dl/) to handle youtube downloads
 - [postgresql](https://www.postgresql.org/) - as the database
 - [redis](http://redis.io/) + [celery](http://www.celeryproject.org/) to handle the recognition background job
-- [SiriWave](https://github.com/caffeinalab/siriwavejs) for visualization 
+- [SiriWave](https://github.com/caffeinalab/siriwavejs) for visualization
 
 If you want to try it locally you need to have these environment variables:
 ```bash

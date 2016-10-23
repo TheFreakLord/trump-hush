@@ -200,6 +200,9 @@ p, input, label, input {
   font-size: 12px;
   padding-left: 20px;
   box-sizing: border-box; }
+  .footer a {
+    text-decoration: none;
+    color: #a8049b; }
 
 .clearfix {
   clear: both; }
